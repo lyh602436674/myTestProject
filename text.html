@@ -1,0 +1,992 @@
+<!--
+ * @Author: 雷宇航
+ * @Date: 2021-09-27 14:13:52
+ * @LastEditTime: 2023-03-30 15:44:30
+ * @LastEditors: 雷宇航
+ * @Description:
+ * @FilePath: \myTestProject\text.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="./vue.min.js"></script>
+    <div id="app" style="width:100%; height:100%;">
+        <!-- <table width="100%">
+            <thead>
+                <tr v-for="(item,index) in localColumns" :key="index + 'th-tr'">
+                    <template v-for="(thItem,thIndex) in item" :key="index + thIndex + 'th-td'">
+                        <template v-if="thItem.rowSpan">
+                            <th :rowspan="thItem.rowSpan">
+                                {{ thItem.title }}
+                            </th>
+                        </template>
+                        <template v-else-if="thItem.colSpan">
+                            <th :colspan="thItem.colSpan">
+                                {{ thItem.title }}
+                            </th>
+                        </template>
+                        <template v-else>
+                            <th>{{ thItem.title }}</th>
+                        </template>
+                    </template>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item,index) in dataSource" :key="index + 'tb-tr'">
+                    <td v-for="(tdItem,tdIndex) in tBodyColumns" :key="index + 'tb-td'">
+                        {{ item[tdItem.dataIndex] ? item[tdItem.dataIndex] : (tdItem.customRender ?
+                        tdItem.customRender(item[tdItem.dataIndex],item) : '--') }}
+                    </td>
+                </tr>
+
+            </tbody>
+        </table> -->
+        <!-- <a href="http://192.168.3.148:9000/test/hifar/idm/ca10eb7fcbc443f9892f69912c14f796.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minioadmin%2F20221102%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20221102T023636Z&X-Amz-Expires=18000&X-Amz-SignedHeaders=host&X-Amz-Signature=ec05e8623ea558ec3d3a0609380145cd264fdf1a37072f3e2d6f56b1945dc9df"
+            download="文件名.png">跳转</a> -->
+        <!-- <div class="box" ref="oDivBox">
+            <div class="gridBox">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+            </div>
+        </div> -->
+        <!-- <div
+            style="width:300px;height:300px;position: relative;border: 1px solid;background-image: url(./111.jpg);background-size: 100% 100%;">
+            乔儿是蛋蛋瓜
+            <div
+                style="width:100%;height:100%;line-height:300px;position: absolute;top:0;background-color: rgba(255, 255, 255,0.3);backdrop-filter: blur(10px);">
+                你能看见下面的字吗
+            </div>
+        </div> -->
+        <!-- <h1>只会hello world! 啥都不会么</h1> -->
+
+        <div>
+
+        </div>
+    </div>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        .box {
+            width: 600px;
+            height: 450px;
+            border: 1px solid #000;
+            position: relative;
+            margin: 30px auto;
+            padding: 20px
+        }
+
+        .box .gridBox {
+            display: grid;
+            grid-template-columns: auto auto;
+            grid-gap: 10px;
+        }
+
+        .box .gridBox div {
+            border: 1px solid #000;
+        }
+
+        .box .gridBox div:nth-of-type(1) {
+            width: 450px;
+            grid-row: 1/span 3;
+        }
+
+        .box .gridBox div:not(nth-of-type(1)) {
+            width: 150px;
+        }
+
+
+
+        @keyframes myAnimation {
+            0% {
+                transform: translateY(0px);
+            }
+
+            20% {
+                transform: translateY(-50px);
+            }
+
+            100% {
+                transform: translateY(1000px);
+            }
+        }
+
+        table {
+            border-spacing: 0;
+            border-top: 1px solid #000;
+            border-left: 1px solid #000;
+        }
+
+        th,
+        td {
+            border-bottom: 1px solid #000;
+            border-right: 1px solid #000;
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        // window.addEventListener('click',function (){
+        //   console.log(123)
+        // })
+
+        // function test(){
+        //   console.log(456)
+        //   return function(){
+        //     console.log(123)
+        //   }0
+        // }
+
+        // function throttle(fn,wait){
+        //   console.log(45666)
+        //   var timer = null;
+        //   return function(){
+        //     var context = this;
+        //     var args = arguments;
+        //     if(!timer){
+        //       timer = setTimeout(function(){
+        //         fn.apply(context,args)
+        //         console.log(arguments[0])
+        //         timer = null;
+        //       },wait)
+        //     }
+        //   }(1)
+        // }
+
+        // function handle(){
+        //   console.log(Math.random());
+        // }
+
+        // window.addEventListener("mousemove",throttle(handle,1000));
+        // throttle(handle,1000)
+
+
+        // var  a = {b:1},b={key:"c"},c={key:"b"}
+        // a[b] = 3
+        // a[c] = 4
+        // console.log(a[b])
+
+        // console.log(1+'1'+'1')
+        // console.log(1+ +'1'+'1')
+        // console.log(1+ -'1'+'1')
+        // console.log('1'+ 1 +'1')
+
+        // console.log(typeof(null) === typeof(window))
+
+        // function syHi(){
+        //   console.log(name)
+        //   console.log(age)
+        //   var name = 'kyee'
+        //   let age = 18
+        // }
+        // syHi()
+        // console.log(['1','11','111'].map(parseInt))
+
+        // Promise.all([]).then(res=>{
+        //   console.log('all')
+        // })
+        // Promise.race([]).then(res=>{
+        //   console.log('race')
+        // })
+
+
+        // console.log('1')
+        // async function async1(){
+        //   await async2()
+        //   console.log('2')
+        // }
+
+        // async function async2(){
+        //   console.log('3')
+        // }
+
+        // async1()
+
+        // setTimeout(function(){
+        //   console.log('4')
+        // },0)
+
+        // new Promise(resolve=>{
+        //   console.log('5')
+        //   resolve()
+        // }).then(()=>{
+        //   console.log('6')
+        // })
+
+        // console.log('7')
+
+
+        // var n = 0
+        // function fn(){
+        //   var n = 10
+        //   function f(){
+        //     n++
+        //     console.log(n)
+        //   }
+        //   f()
+        //   return f
+        // }
+        // var x = fn()
+        // x()
+        // x()
+        // console.log(n)
+
+
+        // function sorter(arr){
+        //  return Array.from(new Set(arr.flat(Infinity))).sort()
+        // }
+
+        // console.log(sorter([1,[3,3,2],[5,4],2]))
+
+
+        // console.log(new Set([1,[3,3,2],[5,4],2]))
+
+
+        // function debounce(fnc, delay) {
+        //     let timeout;
+        //     return function () {
+        //         clearTimeout(timeout);	//每次触发清除上次计时器
+
+        //         if (!timeout) fnc.apply(this, arguments)		//如果 timeout 没有重置为 null 则执行函数
+
+        //         timeout = setTimeout(() => {	//计时结束后 timeout 置为 null
+        //             timeout = null;
+        //         }, delay)
+
+        //     }
+        // }
+        // function getScrollTop(){
+        //   console.log(document.documentElement.scrollTop)
+        // }
+        // window.onscroll = debounce(getScrollTop, 1000)
+
+
+        // // 定义构造函数
+        // function C () {}
+        // function D () {}
+        // // 实例化一个 o 对象
+        // var o = new C()
+        // // true，true --> C.prototype 在 o 的原型链上
+        // console.log(o instanceof C, o.__proto__ === C.prototype, '此时 o 的 __proto__：', o.__proto__, '此时 C 的 prototype：', C.prototype)
+        // // false，false --> D.prototype 不在 o 的原型链上
+        // console.log(o instanceof D, o.__proto__ === D.prototype)
+        // // true true --> Object.prototype 在 o 的原型链上
+        // console.log(o instanceof Object, o.__proto__.__proto__ === Object.prototype)
+        // // 这时我们修改构造函数 C 的原型为一个空对象
+        // C.prototype = {}
+        // // 实例化一个 o2 对象
+        // var o2 = new C()
+        // // true --> C.prototype 在 o2 的原型链上
+        // console.log(o2 instanceof C)
+        // // false，C.prototype 指向了一个空对象,这个空对象不在 o 的原型链上.
+        // console.log(o instanceof C, '此时 o 的 __proto__：', o.__proto__, '此时 C 的 prototype：', C.prototype)
+        // console.log('此时 D 的 prototype：', D.prototype);
+        // // 继承
+        // D.prototype = new C()
+        // console.log('此时 D 的 prototype：', D.prototype);
+        // var o3 = new D()
+        // // true, true --> 因为 o3 是 构造函数 D new 出来的实例对象，所以 D.prototype 一定在 o3 的原型链上
+        // console.log(o3 instanceof D, o3.__proto__ === D.prototype)
+        // // true --> 因为 C.prototype 现在在 o3 的原型链上
+        // console.log(o3 instanceof C)
+        // // true,true --> 上面的结果为什么为 true 呢，看如下代码，D.prototype 是 构造函数 C new 出来的实例对象，所以 C.prototype 一定在 D.prototype 的原型链上
+        // console.log(o3.__proto__ === D.prototype, D.prototype.__proto__ === C.prototype);
+        // // true 相当于如下代码
+        // console.log(o3.__proto__.__proto__ === C.prototype);
+
+
+        // function Person(){}
+        // Person.prototype.name = "人";// 为人类创建一个name属性
+        // Person.prototype.say = function(content){// 为人类创建一个说话的方法
+        //   if(!this.name){ // 如果对象不存在name属性，则使用原型链的name
+        //     this.name = this.__proto__.name;
+        //   }
+        //   console.log("我是" + this.name + ",我想说"+content);
+        // };
+        // function Parent(){}
+        // Parent.prototype = new Person();  // 设置Parent类继承Person类
+        // Parent.prototype.superClass = new Person();// 设置superClass保存父类Person的方法属性
+        // Parent.prototype.name = "父辈类";// 设置Parent类的name属性
+        // Parent.prototype.say = function(){// 设置Parent类自己的 say 方法
+        //   console.log("我是Parent类的say方法！");
+        // };
+        // function Child(){}
+        // Child.prototype = new Parent();// 设置Child类继承Parent类
+        // Child.prototype.superClass = new Parent();// 设置superClass保存父类Parent的方法属性
+        // Child.prototype.say = function(){  //设置Child类自己的say方法
+        //   console.log("我是Child类的say方法！");
+        // }
+        // var c = new Child();// 实例化一个Child对象
+        // c.say();  // 调用自身原型的say方法，输出：我是Child类的say方法！
+        // c.superClass.say(); // 调用父类Parent的say方法，输出： 我是Parent类的say方法！
+        // c.superClass.superClass.say("哈哈");// 直接调用最大的父类Person的say方法(方法中的this指向Person)，输出：我是人,我想说哈哈"
+        // // 用call调用最大的父类Person的say方法(方法中的this指向实例化对象c，但此时c并没有name属性，所以this.name用的是Parent的name)
+        // c.superClass.superClass.say.call(c,"嘻嘻"); // 输出：我是父辈类,我想说嘻嘻
+        // c.name = "子类实例";// 给当前对象增加name属性
+        // // 还是用call调用最大父类Person的say方法(此时c对象中已经有name属性);
+        // c.superClass.superClass.say.call(c,"我是子类的实例化对象"); // 输出：我是子类实例,我想说我是子类的实例化对象
+        // console.log(c.__proto__)
+
+        // function Lyh(){}
+        // var l = new Lyh()
+        // l.prototype = c
+        // console.log(l)
+
+
+        // function foo(name,age){
+        //   this.name = name
+        //   this.age = age
+        // }
+        // foo.prototype.getName = function(){
+        //   console.log('我是'+this.name)
+        // }
+
+        // foo.prototype.getAge = function(){
+        //   console.log('我今年'+this.age)
+        // }
+
+        // Object.prototype.getHope = function(hope){
+        //   this.hope = hope
+        //   console.log('我想'+this.hope)
+        // }
+
+        // var fn = new foo('lyh',18)
+        // fn.getName()
+        // fn.getHope('我擦')
+        // console.log(fn.__proto__.__proto__)
+
+        // function fun(hope){
+        //   this.hope = hope
+        // }
+        // console.log(fun.prototype,'d')
+        // var Fun = new fun('我想做一个前端开发')
+        // console.log(Fun.__proto__)
+        // Fun.__proto__.getHope('我想做一个高级前端开发')
+
+
+        // var arr = []
+        // arr.__proto__.custom = function(){
+        //   console.log('我是一个数组自定义操作方法')
+        // }
+        // console.log(arr.__proto__)
+        // arr.custom()
+
+
+        // console.log(Object.prototype)
+
+        // let text = 'aaa_hello_dictText'
+        // console.log(text.indexOf('_dictText'))
+        // console.log(text.slice(0, text.indexOf('_dictText')))
+        // let arr = [
+        //     { name: "支付宝", money: 100.999, num: 1, payCode: 3 },
+        //     { name: "微信", money: 200.88, num: 1, payCode: 1 },
+        //     { name: "微信", money: 250.6666, num: 1, payCode: 2 },
+        //     { name: "银行卡", money: 300.22, num: 1, payCode: 16 },
+        //     { name: "银行卡", money: 600.3333333, num: 1, payCode: 17 },
+        //     { name: "支付宝", money: 400.111, num: 1, payCode: 4 },
+        //     { name: "微信", money: 666.5555555555, num: 1, payCode: 5 },
+        // ]
+        // let arr1 = arr.filter(item => item.payCode < 6)
+        // let arr2 = arr.filter(item => item.payCode > 6)
+        // function getCountByPayName(arr, keyName, keyValue, num) {
+        //     let baseArr = [], newArr = [];
+        //     for (let key in arr) {
+        //         if (baseArr.includes(arr[key][keyName])) {
+        //             newArr[baseArr.indexOf(arr[key][keyName])][keyValue] += arr[key][keyValue];
+        //             newArr[baseArr.indexOf(arr[key][keyName])][num] += arr[key][num];
+        //         } else {
+        //             baseArr.push(arr[key][keyName]);
+        //             newArr.push(arr[key]);
+        //         }
+        //     }
+        //     return newArr;
+        // }
+        // let result = getCountByPayName(arr1, 'name', 'money', 'num')
+        // let res = result.concat(arr2)
+        // console.log(res)
+
+        // let op = arr.reduce((op, inp) => {
+        //     console.log(op, inp);
+        //     // let { fileName } = inp
+        //     // let key = fileName
+        //     // if (op.has(key)) {
+        //     //     let val = op.get(key)
+        //     //     val.sumPayPrice += inp.sumPayPrice
+        //     // } else {
+        //     //     op.set(key, inp)
+        //     // }
+        //     // return op
+        // }, [])
+        // let arr = [
+        //     { a: 1 },
+        //     { a: 2 },
+        //     { a: 3 },
+        //     { a: 4 },
+        //     { a: 5 },
+        // ]
+        // // 交换第三个和第四个元素
+        // let x = 4, y = 2
+
+        // arr.splice(x - 1, 1, ...arr.splice(y - 1, 1, arr[x - 1]))
+
+        // console.log(arr)
+
+        // let obj = { "code": 200, "msg": "成功", "data": [{ "viewId": "1542772854783873024", "name": "iiit吞吞吐吐吞吞吐吐", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "5086587912785920", "creatorName": null, "modifierName": null }, { "viewId": "1542802996520423424", "name": "呵呵", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "5086587912785920", "creatorName": null, "modifierName": null }, { "viewId": "1512266785632686080", "name": "计重标签", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }, { "viewId": "1514894677927661568", "name": "新增的标签xb", "level": 1, "parentId": "0", "childList": [{ "viewId": "1514894869028540416", "name": "测试标签002", "level": 2, "parentId": "1514894677927661568", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }, { "viewId": "1540283895008858112", "name": "奶牛味", "level": 1, "parentId": "0", "childList": [{ "viewId": "1540284164354478080", "name": "面包", "level": 2, "parentId": "1540283895008858112", "childList": [{ "viewId": "1540284255647698944", "name": "糖", "level": 3, "parentId": "1540284164354478080", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "2270927147175936", "creatorName": null, "modifierName": null }], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "2270927147175936", "creatorName": null, "modifierName": null }], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "2270927147175936", "creatorName": null, "modifierName": null }, { "viewId": "1540287848685637632", "name": "测试标签", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "2388492903048203", "creatorName": null, "modifierName": null }, { "viewId": "1540291259002916864", "name": "9oo", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "4198008751853568", "creatorName": null, "modifierName": null }, { "viewId": "1540291522652672000", "name": "可乐", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "1600789108428800", "creatorName": null, "modifierName": null }, { "viewId": "1367767290724093952", "name": "蛋糕", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }, { "viewId": "1540298016576114688", "name": "很健612", "level": 1, "parentId": "0", "childList": [{ "viewId": "1540298599626313728", "name": "5555776", "level": 2, "parentId": "1540298016576114688", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "2270927147175936", "creatorName": null, "modifierName": null }], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "1600789108428800", "creatorName": null, "modifierName": null }, { "viewId": "1540312822678949888", "name": "晚上13", "level": 1, "parentId": "0", "childList": [{ "viewId": "1540312945341370368", "name": "233测试", "level": 2, "parentId": "1540312822678949888", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "2270927147175936", "creatorName": null, "modifierName": null }], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "1600789108428800", "creatorName": null, "modifierName": null }, { "viewId": "1516661513631436800", "name": "零售品2", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }, { "viewId": "1522138225840361472", "name": "蛋糕类测试标签", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }, { "viewId": "1526131179491823616", "name": "qujinhua", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }, { "viewId": "1536646872167485440", "name": "商品标签0023", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }, { "viewId": "1419922950269833216", "name": "热销商品", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }, { "viewId": "1432967124158124032", "name": "器械类", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }, { "viewId": "1432967160623403008", "name": "注射器类", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }, { "viewId": "1537699693704908800", "name": "huhuhuhu", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": null, "creatorName": null, "modifierName": null }, { "viewId": "1478922893915197440", "name": "冲剂类", "level": 1, "parentId": "0", "childList": [{ "viewId": "1501020280687038464", "name": "测试一下下", "level": 2, "parentId": "1478922893915197440", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }, { "viewId": "1480379390465544192", "name": "外用药", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }, { "viewId": "1480749643863298048", "name": "饮料酒水", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }, { "viewId": "1480752101859659776", "name": "薯片", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }, { "viewId": "1486888322705002496", "name": "电子产品", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }, { "viewId": "1496412965266657280", "name": "配镜", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }, { "viewId": "1498116303486062592", "name": "淡奶油蛋糕", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }, { "viewId": "1498130730860023808", "name": "自编码", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }, { "viewId": "1537745401053057024", "name": "马文涛测试测试", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": null, "creatorName": null, "modifierName": null }, { "viewId": "1539153909585678336", "name": "小马哥哥", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "1556355", "creatorName": null, "modifierName": null }, { "viewId": "1501016230562238464", "name": "测试", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }, { "viewId": "1501017609741668352", "name": "测试-2", "level": 1, "parentId": "0", "childList": [{ "viewId": "1501017770429648896", "name": "测试-111", "level": 2, "parentId": "1501017609741668352", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }, { "viewId": "1501017956702883840", "name": "大大", "level": 1, "parentId": "0", "childList": [{ "viewId": "1501018061841502208", "name": "小小", "level": 2, "parentId": "1501017956702883840", "childList": [{ "viewId": "1501018789976870912", "name": "测试", "level": 3, "parentId": "1501018061841502208", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }, { "viewId": "1501018020410167296", "name": "小小", "level": 1, "parentId": "0", "childList": [{ "viewId": "1501018099485380608", "name": "大大", "level": 2, "parentId": "1501018020410167296", "childList": [{ "viewId": "1508785588722077696", "name": "测试-1", "level": 3, "parentId": "1501018099485380608", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }, { "viewId": "1542453242691194880", "name": "5222", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "1600789108428800", "creatorName": null, "modifierName": null }, { "viewId": "1539499118991380480", "name": "生产商品", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "1556349", "creatorName": null, "modifierName": null }, { "viewId": "1539499150717095936", "name": "原料", "level": 1, "parentId": "0", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "1556349", "creatorName": null, "modifierName": null }, { "viewId": "1504433140301697024", "name": "便利店", "level": 1, "parentId": "0", "childList": [{ "viewId": "1504433544062177280", "name": "卫生用品", "level": 2, "parentId": "1504433140301697024", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }, { "viewId": "1504433205535707136", "name": "日用品", "level": 2, "parentId": "1504433140301697024", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }, { "viewId": "1504433259461873664", "name": "食品", "level": 2, "parentId": "1504433140301697024", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }, { "viewId": "1504433319989874688", "name": "保健食品", "level": 2, "parentId": "1504433140301697024", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }, { "viewId": "1504433382795382784", "name": "饮料", "level": 2, "parentId": "1504433140301697024", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }, { "viewId": "1504433437233254400", "name": "医疗器械", "level": 2, "parentId": "1504433140301697024", "childList": [], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }], "createTime": null, "updateTime": null, "adminUserId": null, "modifier": "", "creatorName": null, "modifierName": null }] }
+        // function recursionViewId(data, arr) {
+        //     for (let item of data) {
+        //         arr.push(item.viewId)
+        //         if (item.childList && item.childList.length) recursionViewId(item.childList, arr)
+        //     }
+        //     return arr
+        // }
+        // console.log(recursionViewId(obj.data));
+        // let num1 = 21
+        // let num2 = null
+        // console.log(Math.max(num1, num2))
+
+
+        // let payInfo = [{ name: '微信', price: '120' }, { name: '支付宝', price: '100' }, { name: '招商银行', price: '100' }]
+        // let refundInfo = [{ name: '微信', price: '20' }, { name: '支付宝', price: '20' }, { name: '现金', price: '300' }]
+
+
+        // function calcPrice(payInfo, refundInfo) {
+        //     let result = []
+        //     if (!payInfo.length) {
+        //         result = refundInfo.map(item => {
+        //             return {
+        //                 name: item.name,
+        //                 price: -item.price
+        //             }
+        //         })
+        //     } else if (!refundInfo.length) {
+        //         result = payInfo
+        //     } else {
+        //         for (let i = 0; i < payInfo.length; i++) {
+        //             for (let j = 0; j < refundInfo.length; j++) {
+        //                 if (payInfo[i].name === refundInfo[j].name) {
+        //                     result.push({ name: payInfo[i].name, price: payInfo[i].price - refundInfo[j].price })
+        //                     payInfo.splice(i, 1)
+        //                     refundInfo.splice(j, 1)
+        //                     i--
+        //                     j--
+        //                     break
+        //                 }
+        //             }
+        //         }
+        //         result = result.concat(payInfo,refundInfo.map(item => {
+        //             return {
+        //                 name: item.name,
+        //                 price: -item.price
+        //             }
+        //         }))
+        //     }
+        //     return result
+        // }
+        // console.log(calcPrice(payInfo, refundInfo));
+
+        // let arr = [{ "id": 227, "payChannel": 6, "payType": 0, "status": 3, "viewId": "750458334416896", "createTime": 1634720837000, "updateTime": 1634720837000, "name": "123", "tenantId": 6900, "weight": 0 }, { "id": 228, "payChannel": 6, "payType": 0, "status": 3, "viewId": "2801359547076608", "createTime": 1635209810000, "updateTime": 1635209810000, "name": "234", "tenantId": 6900, "weight": 0 }, { "id": 244, "payChannel": 6, "payType": 0, "status": 3, "viewId": "6312478727016448", "createTime": 1645583669000, "updateTime": 1645583669000, "name": "标记1", "tenantId": 6900, "weight": 0 }, { "id": 245, "payChannel": 6, "payType": 0, "status": 3, "viewId": "6312574235512832", "createTime": 1645583692000, "updateTime": 1645583692000, "name": "标记2", "tenantId": 6900, "weight": 0 }, { "id": 259, "payChannel": 6, "payType": 0, "status": 3, "viewId": "3768283084558336", "createTime": 1649745457000, "updateTime": 1649745457000, "name": "邮政银行", "tenantId": 6900, "weight": 0 }, { "id": 267, "payChannel": 6, "payType": 0, "status": 3, "viewId": "6254528943427584", "createTime": 1655106596000, "updateTime": 1655106596000, "name": "招商银行", "tenantId": 6900, "weight": 0 }, { "id": 268, "payChannel": 6, "payType": 0, "status": 3, "viewId": "3868357634297856", "createTime": 1656921874000, "updateTime": 1656921874000, "name": "中国建设银行", "tenantId": 6900, "weight": 0 }, { "id": 269, "payChannel": 6, "payType": 0, "status": 3, "viewId": "3868464329003008", "createTime": 1656921900000, "updateTime": 1656921900000, "name": "中国招商银行", "tenantId": 6900, "weight": 0 }, { "id": 270, "payChannel": 6, "payType": 0, "status": 3, "viewId": "4558659290402816", "createTime": 1657086455000, "updateTime": 1657086455000, "name": "多多收款", "tenantId": 6900, "weight": 0 }, { "id": 339, "payChannel": 6, "payType": 0, "status": 3, "viewId": "3234888243548160", "createTime": 1663923401000, "updateTime": 1663923401000, "name": "小马收款", "tenantId": 6900, "weight": 0 }, { "id": 340, "payChannel": 6, "payType": 0, "status": 3, "viewId": "2670004606865408", "createTime": 1666172908000, "updateTime": 1666172908000, "name": "标记test01", "tenantId": 6900, "weight": 0 }, { "id": 341, "payChannel": 6, "payType": 0, "status": 3, "viewId": "2670134240219136", "createTime": 1666172939000, "updateTime": 1666172939000, "name": "标记test002", "tenantId": 6900, "weight": 0 }, { "id": 1, "payChannel": 1, "payType": 2, "status": 1, "viewId": "211421221", "createTime": 1611728143000, "updateTime": 1621499131000, "name": "微信", "tenantId": 0, "weight": 0 }, { "id": 2, "payChannel": 1, "payType": 6, "status": 1, "viewId": "5311231", "createTime": 1611728175000, "updateTime": 1621499134000, "name": "微信", "tenantId": 0, "weight": 0 }, { "id": 3, "payChannel": 2, "payType": 5, "status": 1, "viewId": "2141251", "createTime": 1611729154000, "updateTime": 1621499141000, "name": "支付宝", "tenantId": 0, "weight": 0 }, { "id": 4, "payChannel": 2, "payType": 6, "status": 1, "viewId": "2314141", "createTime": 1611729195000, "updateTime": 1621499144000, "name": "支付宝", "tenantId": 0, "weight": 0 }, { "id": 5, "payChannel": 1, "payType": 5, "status": 1, "viewId": "1231411", "createTime": 1611729235000, "updateTime": 1621499147000, "name": "微信", "tenantId": 0, "weight": 0 }, { "id": 6, "payChannel": 0, "payType": 5, "status": 1, "viewId": "6421223", "createTime": 1611729259000, "updateTime": 1621499151000, "name": "聚合支付", "tenantId": 0, "weight": 0 }, { "id": 7, "payChannel": 3, "payType": 1, "status": 2, "viewId": "53261421", "createTime": 1611733340000, "updateTime": 1611998762000, "name": "现金", "tenantId": 0, "weight": 0 }, { "id": 8, "payChannel": 4, "payType": 1, "status": 2, "viewId": "214612313", "createTime": 1611733348000, "updateTime": 1611998763000, "name": "院内卡", "tenantId": 0, "weight": 0 }, { "id": 9, "payChannel": 5, "payType": 1, "status": 2, "viewId": "1415314", "createTime": 1613714903000, "updateTime": 1621499154000, "name": "会员卡", "tenantId": 0, "weight": 0 }, { "id": 100, "payChannel": 7, "payType": 0, "status": 2, "viewId": "51423141", "createTime": 1629337626000, "updateTime": 1640586297000, "name": "礼品卡", "tenantId": 0, "weight": 0 }, { "id": 200, "payChannel": 8, "payType": 0, "status": 2, "viewId": "1235123", "createTime": 1629337656000, "updateTime": 1640586301000, "name": "余额", "tenantId": 0, "weight": 0 }, { "id": 234, "payChannel": 10, "payType": 0, "status": 1, "viewId": "3229949818991938", "createTime": 1642142870000, "updateTime": 1644285546000, "name": "抖音支付", "tenantId": 0, "weight": 0 }, { "id": 342, "payChannel": 11, "payType": 0, "status": 4, "viewId": "225662353463344", "createTime": 1667199045000, "updateTime": 1667199064000, "name": "美团支付", "tenantId": 0, "weight": 0 }, { "id": 343, "payChannel": 11, "payType": 0, "status": 4, "viewId": "225662352343254", "createTime": 1667199082000, "updateTime": 1667199088000, "name": "饿了么支付", "tenantId": 0, "weight": 0 }]
+        // let result = []
+        // let baseResult = []
+        // cityAndShopVoList.forEach(item => {
+        //     if (baseResult) { }
+        // })
+        // var arr = [
+        //     { "id": "1", "name": "值1", "value": "11111" },
+        //     { "id": "1", "name": "值1", "value": "111" },
+        //     { "id": "2", "name": "值2", "value": "2315432" },
+        //     { "id": "2", "name": "值2", "value": "23131" },
+        //     { "id": "2", "name": "值2", "value": "25462" },
+        //     { "id": "3", "name": "值3", "value": "333333" },
+        //     { "id": "4", "name": "值4", "value": "4444" },
+        //     { "id": "4", "name": "值4", "value": "4444wq" }
+
+        // ]
+        //根据id进行分类
+        // var result = arr.reduce(function (prev, cur) {
+        //     prev[cur.id] = prev[cur.id] || [];
+        //     prev[cur.id].push(cur);
+        //     return prev;
+        // }, []);
+        // var map = {},
+        //     result = [];
+        // for (var i = 0; i < arr.length; i++) {
+        //     var ai = arr[i];
+        //     if (!map[ai.payChannel]) {
+        //         result.push({
+        //             payChannel: ai.payChannel,
+        //             shopList: [ai]
+        //         });
+        //         map[ai.payChannel] = ai;
+        //     } else {
+        //         for (var j = 0; j < result.length; j++) {
+        //             var dj = result[j];
+        //             if (dj.payChannel == ai.payChannel) {
+        //                 dj.shopList.push(ai);
+        //                 break;
+        //             }
+        //         }
+        //     }
+        // }
+        // var map = {},
+        //     dest = [];
+        // for (var i = 0; i < arr.length; i++) {
+        //     var ai = arr[i];
+        //     if (!map[ai.id]) {
+        //         dest.push({
+        //             id: ai.id,
+        //             name: ai.name,
+        //             data: [ai]
+        //         });
+        //         map[ai.id] = ai;
+        //     } else {
+        //         for (var j = 0; j < dest.length; j++) {
+        //             var dj = dest[j];
+        //             if (dj.id == ai.id) {
+        //                 dj.data.push(ai);
+        //                 break;
+        //             }
+        //         }
+        //     }
+        // }
+
+
+        // console.log(result, 'result');
+
+
+        setTimeout(function () {
+            console.log('1');
+            new Promise(function (resolve) {
+                console.log('2'); resolve();
+            }).then(function () {
+                console.log('3');
+            });
+        });
+        new Promise(function (resolve) {
+            console.log('4'); resolve();
+        }).then(function () {
+            console.log('5');
+            new Promise(function (resolve) {
+                resolve();
+                console.log('6');
+            }).then(function () {
+                console.log('7');
+            });
+        });
+        new Promise(function (resolve) {
+            resolve();
+            console.log('8');
+        }).then(function () {
+            console.log('9');
+        });
+
+
+        function extend(to, _from) {
+            for (var key in _from) {
+                to[key] = _from[key];
+            }
+            return to
+        }
+
+        /**
+         * Merge an Array of Objects into a single Object.
+         */
+        function toObject(arr) {
+            var res = {};
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i]) {
+                    extend(res, arr[i]);
+                }
+            }
+            return res
+        }
+
+        console.log(toObject([
+            { a: 1 },
+            { b: 2 },
+            { a: 3 }
+        ]));
+
+        function isObject(obj) {
+            return obj !== null && typeof obj === 'object'
+        }
+        function looseEqual(a, b) {
+            if (a === b) {
+                return true
+            }
+            var isObjectA = isObject(a);
+            var isObjectB = isObject(b);
+            if (isObjectA && isObjectB) {
+                try {
+                    var isArrayA = Array.isArray(a);
+                    var isArrayB = Array.isArray(b);
+                    if (isArrayA && isArrayB) {
+                        return a.length === b.length && a.every(function (e, i) {
+                            return looseEqual(e, b[i])
+                        })
+                    } else if (a instanceof Date && b instanceof Date) {
+                        return a.getTime() === b.getTime()
+                    } else if (!isArrayA && !isArrayB) {
+                        var keysA = Object.keys(a);
+                        var keysB = Object.keys(b);
+                        return keysA.length === keysB.length && keysA.every(function (key) {
+                            return looseEqual(a[key], b[key])
+                        })
+                    } else {
+                        /* istanbul ignore next */
+                        return false
+                    }
+                } catch (e) {
+                    /* istanbul ignore next */
+                    return false
+                }
+            } else if (!isObjectA && !isObjectB) {
+                return String(a) === String(b)
+            } else {
+                return false
+            }
+        }
+        console.log(looseEqual({ a: 1 }, { b: 1 }));
+
+
+
+        function cached(fn) {
+            const cache = new Map();
+            return function cachedFn(str) {
+                console.log(str, 'str')
+                if (!cache.get(str)) {
+                    let result = fn(str);
+                    cache.set(str, result);
+                }
+                return cache.get(str);
+            }
+        }
+
+        function computed(str) {
+            // console.log('计算了一分钟');
+            return '计算出来了';
+        }
+
+        // console.log(cached(computed)('12'));
+    </script>
+    <script>
+        var nums = [2, 7, 11, 15], target = 18
+        function twoNum(nums, target) {
+            for (var i = 0; i < nums.length; i++) {
+
+            }
+        }
+
+        // console.log(twoNum(nums, target));
+
+    </script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            created() {
+                this.tBodyColumns = this.getColumnsChildren(this.columns, [])
+                this.localColumns = this.getHeaderRows({ columns: this._groupColumns(this.columns) })
+                console.log(this.localColumns, 'this.localColumns')
+                // console.log(this.getHeaderRows({ columns: this._groupColumns(this.columns) }))
+            },
+            methods: {
+                closeClick() {
+                    let oDiv = this.$refs.oDivBox
+                    // console.log(oDiv, 'oDiv')
+                    oDiv.style.animation = 'myAnimation 0.5s infinite linear'
+                },
+                // 拿到需要展示字段的列数据
+                getColumnsChildren(arr, newArr) {
+                    for (let i = 0; i < arr.length; i++) {
+                        let item = arr[i]
+                        if (item.dataIndex && item.title) {
+                            newArr.push(item)
+                        }
+                        if (item.children) {
+                            this.getColumnsChildren(item.children, newArr)
+                        }
+                    }
+                    return newArr
+                },
+                getHeaderRows(record) {
+                    var columnsArr = record.columns,
+                        columns = columnsArr === undefined ? [] : columnsArr,
+                        record$currentRow = record.currentRow,
+                        currentRow = record$currentRow === undefined ? 0 : record$currentRow,
+                        record$rows = record.rows,
+                        rows = record$rows === undefined ? [] : record$rows,
+                        record$isLast = record.isLast,
+                        isLast = record$isLast === undefined ? true : record$isLast;
+
+                    rows = rows || [];
+                    rows[currentRow] = rows[currentRow] || [];
+
+                    columns.forEach(function (column, i) {
+                        if (column.rowSpan && rows.length < column.rowSpan) {
+                            while (rows.length < column.rowSpan) {
+                                rows.push([]);
+                            }
+                        }
+                        var cellIsLast = isLast && i === columns.length - 1;
+                        var cell = Object.assign({}, column, { dataIndex: column.dataIndex });
+                        if (column.children) {
+                            this.getHeaderRows({
+                                columns: column.children,
+                                currentRow: currentRow + 1,
+                                rows: rows,
+                                isLast: cellIsLast
+                            });
+                        }
+                        if ('colSpan' in column) {
+                            cell.colSpan = column.colSpan;
+                        }
+                        if ('rowSpan' in column) {
+                            cell.rowSpan = column.rowSpan;
+                        }
+                        if (cell.colSpan !== 0) {
+                            rows[currentRow].push(cell);
+                        }
+                    }.bind(this));
+                    return rows.filter(function (row) {
+                        return row.length > 0;
+                    });
+                },
+                _groupColumns(columns) {
+                    var currentRow = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+                    var parentColumn = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+                    var rows = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
+
+                    rows[currentRow] = rows[currentRow] || [];
+                    var grouped = [];
+                    var setRowSpan = function setRowSpan(column) {
+                        var rowSpan = rows.length - currentRow;
+                        if (column && !column.children &&
+                            rowSpan > 1 && (!column.rowSpan || column.rowSpan < rowSpan)) {
+                            column.rowSpan = rowSpan;
+                        }
+                    };
+                    columns.forEach(function (column, index) {
+                        var newColumn = Object.assign({}, column);
+                        rows[currentRow].push(newColumn);
+                        parentColumn.colSpan = parentColumn.colSpan || 0;
+                        if (newColumn.children && newColumn.children.length > 0) {
+                            newColumn.children = this._groupColumns(newColumn.children, currentRow + 1, newColumn, rows);
+                            parentColumn.colSpan += newColumn.colSpan;
+                        } else {
+                            parentColumn.colSpan += 1;
+                        }
+                        for (var i = 0; i < rows[currentRow].length - 1; i += 1) {
+                            setRowSpan(rows[currentRow][i]);
+                        }
+                        if (index + 1 === columns.length) {
+                            setRowSpan(newColumn);
+                        }
+                        grouped.push(newColumn);
+                    }.bind(this));
+                    return grouped;
+                }
+            },
+            data: {
+                twoDimensionalArray: [
+                    [1, 2, 3, 4],
+                    [5, 6, 7, 8],
+                ],
+                localColumns: [],
+                tBodyColumns: [],
+                dataSource: [
+                    {
+                        year: "2022",
+                        RepairLine: "第一线",
+                        machineType: "OKK",
+                        dutyPlanNum: "100",
+                        dutyActualNum: "10",
+                        decomposePlanNum: "100",
+                        decomposeActualNum: "20",
+                        countPlanNum: "100",
+                        countActualNum: "30",
+                        checkPlanNum: "100",
+                        checkActualNum: "40",
+                        testPlanNum: "100",
+                        testActualNum: "80",
+                        leavePlanNum: "100",
+                        leaveActualNum: "20",
+                    },
+                ],
+                columns: [
+                    {
+                        title: "年度",
+                        dataIndex: "year",
+                        align: 'center',
+                    },
+                    {
+                        title: "修理线",
+                        dataIndex: "RepairLine",
+                        align: 'center',
+                    },
+                    {
+                        title: "机型",
+                        dataIndex: "machineType",
+                        align: 'center',
+                    },
+                    {
+                        title: '责任书指标',
+                        children: [
+                            {
+                                title: '计划数量',
+                                dataIndex: 'dutyPlanNum',
+                                align: 'center',
+                            },
+                            {
+                                title: '实际数量',
+                                dataIndex: "dutyActualNum",
+                                align: 'center',
+                            },
+                        ],
+                    },
+                    {
+                        title: '厂内任务指标',
+                        children: [
+                            {
+                                title: "分解",
+                                children: [
+                                    {
+                                        title: '计划数量',
+                                        dataIndex: 'decomposePlanNum',
+                                        align: 'center',
+                                    },
+                                    {
+                                        title: '实际数量',
+                                        dataIndex: "decomposeActualNum",
+                                        align: 'center',
+                                    },
+                                    {
+                                        title: '百分比',
+                                        dataIndex: "decomposePercentage",
+                                        align: 'center',
+                                        customRender: function (text, row) {
+                                            return (row.decomposeActualNum / row.decomposePlanNum * 100) + '%'
+                                        }
+                                    },
+                                ],
+                            },
+                            {
+                                title: "总装",
+                                children: [
+                                    {
+                                        title: '计划数量',
+                                        dataIndex: 'countPlanNum',
+                                        align: 'center',
+                                    },
+                                    {
+                                        title: '实际数量',
+                                        dataIndex: "countActualNum",
+                                        align: 'center',
+                                    },
+                                    {
+                                        title: '百分比',
+                                        dataIndex: "countPercentage",
+                                        align: 'center',
+                                        customRender: function (text, row) {
+                                            return (row.countActualNum / row.countPlanNum * 100) + '%'
+                                        }
+                                    },
+                                ],
+                            },
+                            {
+                                title: "厂检",
+                                children: [
+                                    {
+                                        title: '计划数量',
+                                        dataIndex: 'checkPlanNum',
+                                        align: 'center',
+                                    },
+                                    {
+                                        title: '实际数量',
+                                        dataIndex: "checkActualNum",
+                                        align: 'center',
+                                    },
+                                    {
+                                        title: '百分比',
+                                        dataIndex: "checkPercentage",
+                                        align: 'center',
+                                        customRender: function (text, row) {
+                                            return (row.checkActualNum / row.checkPlanNum * 100) + '%'
+                                        }
+                                    },
+                                ],
+                            },
+                            {
+                                title: "试车",
+                                children: [
+                                    {
+                                        title: '计划数量',
+                                        dataIndex: 'testPlanNum',
+                                        align: 'center',
+                                    },
+                                    {
+                                        title: '实际数量',
+                                        dataIndex: "testActualNum",
+                                        align: 'center',
+                                    },
+                                    {
+                                        title: '百分比',
+                                        dataIndex: "testPercentage",
+                                        align: 'center',
+                                        customRender: function (text, row) {
+                                            return (row.testActualNum / row.testPlanNum * 100) + '%'
+                                        }
+                                    },
+                                ],
+                            },
+                            {
+                                title: "出厂",
+                                children: [
+                                    {
+                                        title: '计划数量',
+                                        dataIndex: 'leavePlanNum',
+                                        align: 'center',
+                                    },
+                                    {
+                                        title: '实际数量',
+                                        dataIndex: "leaveActualNum",
+                                        align: 'center',
+                                    },
+                                    {
+                                        title: '百分比',
+                                        dataIndex: "leavePercentage",
+                                        align: 'center',
+                                        customRender: function (text, row) {
+                                            return (row.leaveActualNum / row.leavePlanNum * 100) + '%'
+                                        }
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                ],
+            },
+        })
+    </script>
+</body>
+
+</html>
